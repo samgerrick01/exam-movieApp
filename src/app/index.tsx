@@ -3,6 +3,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import { RootState } from '@src/redux/store';
+import { router } from 'expo-router';
 
 const index = () => {
   const { movies } = useSelector((state: RootState) => state.movie);
@@ -33,7 +34,7 @@ const index = () => {
       <View className='my-4 mb-36'>
         <TouchableOpacity
           className='px-12 py-3 rounded-lg bg-red-600'
-          onPress={() => {}}
+          onPress={() => router.push('/(tabs)/')}
         >
           <Text className='text-white text-lg font-medium'>Explore</Text>
         </TouchableOpacity>
