@@ -6,8 +6,6 @@ import { RootState } from '@src/redux/store';
 import { router } from 'expo-router';
 
 const index = () => {
-  const { movies } = useSelector((state: RootState) => state.movie);
-
   return (
     <View className='flex-1 justify-end items-center space-y10 relative'>
       <StatusBar style='auto' hidden />

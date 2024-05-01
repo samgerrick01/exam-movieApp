@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 const SearchScreen = () => {
   return (
-    <View>
-      <Text>SearchScreen</Text>
+    <View className='flex-1 relative'>
+      <Text>Search Screen</Text>
     </View>
   );
 };

@@ -1,25 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { movieType } from '@src/lib/types';
+import { MovieType } from '@src/lib/types';
 
 export interface MovieState {
-  movies: movieType[];
+  trendingMovies: MovieType[];
 }
 
 const initialState: MovieState = {
-  movies: [],
+  trendingMovies: [],
 };
 
 export const movieSlice = createSlice({
   name: 'movie',
   initialState,
   reducers: {
-    setMovies: (state, action: PayloadAction<movieType[]>) => {
-      state.movies = action.payload;
+    setTrendingMovies: (state, action: PayloadAction<MovieType[]>) => {
+      state.trendingMovies = action.payload;
     },
   },
 });
 
-export const { setMovies } = movieSlice.actions;
+export const { setTrendingMovies } = movieSlice.actions;
 
 export default movieSlice.reducer;

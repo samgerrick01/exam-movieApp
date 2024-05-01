@@ -1,4 +1,4 @@
-export type movieType = {
+export type MovieType = {
   '#TITLE': string;
   '#YEAR': number;
   '#IMDB_ID': string;
