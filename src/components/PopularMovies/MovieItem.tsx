@@ -1,0 +1,43 @@
+import { MovieType } from '@src/lib/types';
+import React from 'react';
+import {
+  Dimensions,
+  Image,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+
+var { width, height } = Dimensions.get('window');
+
+type MovieItemProps = {
+  item: MovieType;
+  handleClick: (item: MovieType) => void;
+};
+
+const MovieItem = (props: MovieItemProps) => {
+  const { item, handleClick } = props;
+
+  return (
+    <TouchableWithoutFeedback onPress={() => handleClick(item)}>
+      <View className='w-[48%]'>
+        <Image
+          source={{
+            uri: item['#IMG_POSTER'],
+          }}
+          style={{
+            width: width / 2.15,
+            height: height / 3,
+          }}
+          resizeMode='cover'
+          className='rounded-3xl'
+        />
+        <Text className='text-white text-center mt-2 w-[100%] text-lg'>
+          {item['#TITLE']}
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+export default MovieItem;

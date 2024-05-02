@@ -1,3 +1,4 @@
 import TrendingMovies from './TrendingMovies';
+import PopularMovies from './PopularMovies';
 
-export { TrendingMovies };
+export { TrendingMovies, PopularMovies };

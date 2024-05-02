@@ -1,7 +1,6 @@
-import { MovieType } from '@src/lib/types';
-
 const baseUrl = 'https://search.imdbot.workers.dev/';
-const trendingApi = `${baseUrl}?q=`;
+const defaultMovie = `${baseUrl}?q=`;
+const singleMovie = `${baseUrl}?tt=`;
 
 async function movieApiCall(endpoints: string) {
   try {
@@ -14,5 +13,13 @@ async function movieApiCall(endpoints: string) {
 }
 
 export const fetchTrendingMovies = () => {
-  return movieApiCall(trendingApi);
+  return movieApiCall(defaultMovie);
+};
+
+export const searchMovies = (query: string) => {
+  return movieApiCall(`${defaultMovie}${query}`);
+};
+
+export const selectSingleMovie = (id: string) => {
+  return movieApiCall(`${singleMovie}${id}`);
 };

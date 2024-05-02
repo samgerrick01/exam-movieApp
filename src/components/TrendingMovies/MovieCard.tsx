@@ -3,6 +3,7 @@ import {
   TouchableWithoutFeedback,
   Image,
   Text,
+  View,
 } from 'react-native';
 import React from 'react';
 import { MovieType } from '@src/lib/types';
@@ -18,7 +19,6 @@ export default function MovieCard(props: MovieCardProps) {
   const { item, handleClick } = props;
   // console.log("Movie Image", item.poster_path);
 
-  console.log('Movie Image', item['#IMDB_URL']);
   return (
     <TouchableWithoutFeedback onPress={() => handleClick(item)}>
       <Image
