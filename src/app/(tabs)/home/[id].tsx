@@ -1,8 +1,10 @@
 import { Entypo, FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelectSingleMovie } from '@src/api';
 import { MovieData } from '@src/components';
 import {
   removeSavedMovie,
+  saveSaveMoviesfromLocalStorage,
   setSavedMovies,
   setSingleMovie,
 } from '@src/redux/movieSlice';
@@ -31,20 +33,29 @@ const SingleMovieScreen = () => {
     if (data) dispatch(setSingleMovie(data));
   }, [isFetching]);
 
-  const saveMovie = () => {
+  const saveMovie = async () => {
     const movie = trendingMovies.find(
       (movie) => movie['#IMDB_ID'] === idString
     );
     if (movie) {
       if (checkIfSaved(idString as string)) {
         dispatch(removeSavedMovie(movie));
+        await AsyncStorage.setItem(
+          'savedMovies',
+          JSON.stringify(savedMovies.filter((m) => m['#IMDB_ID'] !== idString))
+        );
       } else {
         dispatch(setSavedMovies(movie));
+        await AsyncStorage.setItem(
+          'savedMovies',
+          JSON.stringify([...savedMovies, movie])
+        );
       }
     }
   };
 
   const checkIfSaved = (id: string) => {
+    if (savedMovies.length === 0) checkLocalStorage();
     return savedMovies.some((movie) => movie['#IMDB_ID'] === id);
   };
 
@@ -57,6 +68,13 @@ const SingleMovieScreen = () => {
         ] || singleMovie?.name;
     }
     return title;
+  };
+
+  const checkLocalStorage = async () => {
+    const savedMovies = await AsyncStorage.getItem('savedMovies');
+    if (savedMovies) {
+      dispatch(saveSaveMoviesfromLocalStorage(JSON.parse(savedMovies)));
+    }
   };
 
   return (

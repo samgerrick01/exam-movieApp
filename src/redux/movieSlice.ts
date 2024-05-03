@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { MovieDataType, MovieType } from '@src/lib/types';
@@ -35,6 +36,12 @@ export const movieSlice = createSlice({
     clearSavedMovies: (state) => {
       state.savedMovies = [];
     },
+    saveSaveMoviesfromLocalStorage: (
+      state,
+      action: PayloadAction<MovieType[]>
+    ) => {
+      state.savedMovies = action.payload;
+    },
   },
 });
 
@@ -44,6 +51,7 @@ export const {
   setSavedMovies,
   removeSavedMovie,
   clearSavedMovies,
+  saveSaveMoviesfromLocalStorage,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;
