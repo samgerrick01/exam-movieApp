@@ -15,7 +15,7 @@ const SavedMovies = (props: TrendingMoviesProps) => {
     router.push(`/(tabs)/home/${item['#IMDB_ID']}`);
   };
   return (
-    <View className='h-[100%]'>
+    <View className='h-[90%]'>
       <FlatList
         data={movies}
         renderItem={({ item }: { item: MovieType }) => (

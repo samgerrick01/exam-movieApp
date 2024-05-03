@@ -32,6 +32,9 @@ export const movieSlice = createSlice({
         (movie) => movie['#IMDB_ID'] !== action.payload['#IMDB_ID']
       );
     },
+    clearSavedMovies: (state) => {
+      state.savedMovies = [];
+    },
   },
 });
 
@@ -40,6 +43,7 @@ export const {
   setSingleMovie,
   setSavedMovies,
   removeSavedMovie,
+  clearSavedMovies,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;
