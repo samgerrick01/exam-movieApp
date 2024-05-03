@@ -5,11 +5,15 @@ import { MovieDataType, MovieType } from '@src/lib/types';
 export interface MovieState {
   trendingMovies: MovieType[];
   singleMovie: MovieDataType | null;
+  savedMovies: MovieType[];
+  page: string;
 }
 
 const initialState: MovieState = {
   trendingMovies: [],
   singleMovie: null,
+  savedMovies: [],
+  page: '',
 };
 
 export const movieSlice = createSlice({
@@ -22,9 +26,26 @@ export const movieSlice = createSlice({
     setSingleMovie: (state, action: PayloadAction<MovieDataType | null>) => {
       state.singleMovie = action.payload;
     },
+    setSavedMovies: (state, action: PayloadAction<MovieType>) => {
+      state.savedMovies.push(action.payload);
+    },
+    removeSavedMovie: (state, action: PayloadAction<MovieType>) => {
+      state.savedMovies = state.savedMovies.filter(
+        (movie) => movie['#IMDB_ID'] !== action.payload['#IMDB_ID']
+      );
+    },
+    setPage: (state, action: PayloadAction<string>) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setTrendingMovies, setSingleMovie } = movieSlice.actions;
+export const {
+  setTrendingMovies,
+  setSingleMovie,
+  setSavedMovies,
+  removeSavedMovie,
+  setPage,
+} = movieSlice.actions;
 
 export default movieSlice.reducer;

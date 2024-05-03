@@ -1,27 +1,28 @@
 import { MovieType } from '@src/lib/types';
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import MovieItem from './MovieItem';
+import MovieItem from '../PopularMovies/MovieItem';
 import { router } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setPage } from '@src/redux/movieSlice';
 
 type TrendingMoviesProps = {
   movies: MovieType[];
-  title: string;
 };
 
-const PopularMovies = (props: TrendingMoviesProps) => {
+const SavedMovies = (props: TrendingMoviesProps) => {
   const dispatch = useDispatch();
-  const { movies, title } = props;
+  const { movies } = props;
 
   const handleClick = (item: MovieType) => {
-    dispatch(setPage('home'));
+    dispatch(setPage('save'));
     router.push(`/(tabs)/home/${item['#IMDB_ID']}`);
   };
   return (
-    <View className='h-[75%]'>
-      <Text className='text-white text-2xl font-bold mx-4 mt-4'>{title}</Text>
+    <View className='h-[100%]'>
+      <Text className='text-white text-2xl font-bold mx-4 mt-4'>
+        Saved Movies
+      </Text>
 
       <FlatList
         data={movies}
@@ -37,4 +38,4 @@ const PopularMovies = (props: TrendingMoviesProps) => {
   );
 };
 
-export default PopularMovies;
+export default SavedMovies;

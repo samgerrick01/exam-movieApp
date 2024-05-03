@@ -1,7 +1,11 @@
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { useSelectSingleMovie } from '@src/api';
 import { MovieData } from '@src/components';
-import { setSingleMovie } from '@src/redux/movieSlice';
+import {
+  removeSavedMovie,
+  setSavedMovies,
+  setSingleMovie,
+} from '@src/redux/movieSlice';
 import { RootState } from '@src/redux/store';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
@@ -19,31 +23,56 @@ const SingleMovieScreen = () => {
   const dispatch = useDispatch();
   const { id: idString } = useLocalSearchParams();
   const { data, isFetching } = useSelectSingleMovie(idString as string);
-  const { singleMovie } = useSelector((state: RootState) => state.movies);
+  const { singleMovie, savedMovies, trendingMovies, page } = useSelector(
+    (state: RootState) => state.movies
+  );
 
   useEffect(() => {
     if (data) dispatch(setSingleMovie(data));
   }, [isFetching]);
-  console.log(idString);
+
+  const saveMovie = () => {
+    const movie = trendingMovies.find(
+      (movie) => movie['#IMDB_ID'] === idString
+    );
+    if (movie) {
+      if (checkIfSaved(idString as string)) {
+        dispatch(removeSavedMovie(movie));
+      } else {
+        dispatch(setSavedMovies(movie));
+      }
+    }
+  };
+
+  const checkIfSaved = (id: string) => {
+    return savedMovies.some((movie) => movie['#IMDB_ID'] === id);
+  };
+
+  const backBtn = () => {
+    // dispatch(setSingleMovie(null));
+    router.push(`/(tabs)/home`);
+  };
+
   return (
     <View className='flex-1'>
       <Stack.Screen options={{ headerShown: false }} />
       <View className='z-20 w-full flex-row justify-between items-center px-4 mt-12 absolute'>
         <TouchableOpacity
           className='bg-[#2496ff] p-2 rounded-full items-center justify-center'
-          onPress={() => {
-            dispatch(setSingleMovie(null));
-            router.back();
-          }}
+          onPress={backBtn}
         >
           <Entypo name='chevron-left' size={24} color='white' />
         </TouchableOpacity>
 
         <TouchableOpacity
           className='bg-[#2496ff] p-2 rounded-full items-center justify-center'
-          onPress={() => {}}
+          onPress={saveMovie}
         >
-          <FontAwesome name='heart' size={24} color='white' />
+          <FontAwesome
+            name='heart'
+            size={24}
+            color={checkIfSaved(idString as string) ? 'red' : 'white'}
+          />
         </TouchableOpacity>
       </View>
       {singleMovie === null ? (

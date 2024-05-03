@@ -51,7 +51,7 @@ const HomeScreen = () => {
 
       <View>
         {trendingMovies?.length > 0 && (
-          <PopularMovies movies={trendingMovies} />
+          <PopularMovies title='Popular Movies' movies={trendingMovies} />
         )}
       </View>
     </View>
