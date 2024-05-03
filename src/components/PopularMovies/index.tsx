@@ -2,6 +2,7 @@ import { MovieType } from '@src/lib/types';
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import MovieItem from './MovieItem';
+import { router } from 'expo-router';
 
 type TrendingMoviesProps = {
   movies: MovieType[];
@@ -11,7 +12,7 @@ const PopularMovies = (props: TrendingMoviesProps) => {
   const { movies } = props;
 
   const handleClick = (item: MovieType) => {
-    console.log('Movie Clicked', item);
+    router.push(`/(tabs)/home/${item['#IMDB_ID']}`);
   };
 
   return (

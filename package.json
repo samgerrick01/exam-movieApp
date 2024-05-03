@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "@tanstack/react-query": "^5.32.1",
     "@types/react-native-snap-carousel": "^3.8.11",
+    "dayjs": "^1.11.11",
     "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~50.0.17",
     "expo-font": "~11.10.3",

@@ -13,8 +13,9 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   return (
     <Tabs screenOptions={{}}>
+      <Tabs.Screen name='index' options={{ href: null, headerShown: false }} />
       <Tabs.Screen
-        name='index'
+        name='home'
         options={{
           title: 'Home',
           headerShown: false,
