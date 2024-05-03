@@ -4,23 +4,35 @@ import React from 'react';
 import { Image, Linking, ScrollView, Text, View } from 'react-native';
 import Actors from './Actors';
 import ReviewCard from './ReviewCard';
+import { RootState } from '@src/redux/store';
+import { useSelector } from 'react-redux';
 
 type MovieDataProps = {
   singleMovie: MovieDataType | null;
   width: number;
-};
-
-const openLink = (url: string) => {
-  Linking.openURL(url);
+  title: () => string;
+  id: string;
 };
 
 const MovieData = (props: MovieDataProps) => {
-  const { singleMovie, width } = props;
+  const { singleMovie, width, title, id } = props;
+  const { trendingMovies } = useSelector((state: RootState) => state.movies);
+
+  const getImage = (id: string) => {
+    return trendingMovies.find((movie) => movie['#IMDB_ID'] === id)?.[
+      '#IMG_POSTER'
+    ];
+  };
+
+  const openLink = (url: string) => {
+    Linking.openURL(url);
+  };
+
   return (
     singleMovie && (
       <ScrollView className='flex-1'>
         <Image
-          source={{ uri: singleMovie?.image }}
+          source={{ uri: getImage(id) }}
           style={{ width, aspectRatio: 2 / 3 }}
           resizeMode='cover'
         />
@@ -32,9 +44,7 @@ const MovieData = (props: MovieDataProps) => {
           }}
         >
           <View className='p-5'>
-            <Text className='text-2xl text-black font-soraBold'>
-              {singleMovie?.name}
-            </Text>
+            <Text className='text-2xl text-black font-soraBold'>{title()}</Text>
             <View className='flex-row gap-1'>
               {singleMovie?.genre.map((item, index, array) => {
                 let showDot = index !== array.length - 1;

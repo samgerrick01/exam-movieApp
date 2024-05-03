@@ -6,14 +6,12 @@ export interface MovieState {
   trendingMovies: MovieType[];
   singleMovie: MovieDataType | null;
   savedMovies: MovieType[];
-  page: string;
 }
 
 const initialState: MovieState = {
   trendingMovies: [],
   singleMovie: null,
   savedMovies: [],
-  page: '',
 };
 
 export const movieSlice = createSlice({
@@ -34,9 +32,6 @@ export const movieSlice = createSlice({
         (movie) => movie['#IMDB_ID'] !== action.payload['#IMDB_ID']
       );
     },
-    setPage: (state, action: PayloadAction<string>) => {
-      state.page = action.payload;
-    },
   },
 });
 
@@ -45,7 +40,6 @@ export const {
   setSingleMovie,
   setSavedMovies,
   removeSavedMovie,
-  setPage,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

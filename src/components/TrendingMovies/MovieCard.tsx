@@ -17,7 +17,6 @@ type MovieCardProps = {
 
 export default function MovieCard(props: MovieCardProps) {
   const { item, handleClick } = props;
-  // console.log("Movie Image", item.poster_path);
 
   return (
     <TouchableWithoutFeedback onPress={() => handleClick(item)}>

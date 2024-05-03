@@ -15,6 +15,9 @@ const SaveScreen = () => {
         resizeMode='cover'
       />
       <View>
+        <Text className='text-white text-2xl font-bold mx-4 mt-4'>
+          Saved Movies
+        </Text>
         {savedMovies?.length > 0 && <SavedMovies movies={savedMovies} />}
       </View>
     </View>

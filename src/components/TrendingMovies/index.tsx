@@ -38,7 +38,6 @@ const TrendingMovies = (props: TrendingMoviesProps) => {
           autoPlay={true}
           data={movies}
           scrollAnimationDuration={2000}
-          // onSnapToItem={(index) => console.log('current index:', index)}
           renderItem={({ item }) => (
             <MovieCard item={item} handleClick={handleClick} />
           )}

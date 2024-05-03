@@ -3,8 +3,6 @@ import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import MovieItem from './MovieItem';
 import { router } from 'expo-router';
-import { useDispatch } from 'react-redux';
-import { setPage } from '@src/redux/movieSlice';
 
 type TrendingMoviesProps = {
   movies: MovieType[];
@@ -12,11 +10,9 @@ type TrendingMoviesProps = {
 };
 
 const PopularMovies = (props: TrendingMoviesProps) => {
-  const dispatch = useDispatch();
   const { movies, title } = props;
 
   const handleClick = (item: MovieType) => {
-    dispatch(setPage('home'));
     router.push(`/(tabs)/home/${item['#IMDB_ID']}`);
   };
   return (

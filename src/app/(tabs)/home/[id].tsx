@@ -23,7 +23,7 @@ const SingleMovieScreen = () => {
   const dispatch = useDispatch();
   const { id: idString } = useLocalSearchParams();
   const { data, isFetching } = useSelectSingleMovie(idString as string);
-  const { singleMovie, savedMovies, trendingMovies, page } = useSelector(
+  const { singleMovie, savedMovies, trendingMovies } = useSelector(
     (state: RootState) => state.movies
   );
 
@@ -48,9 +48,15 @@ const SingleMovieScreen = () => {
     return savedMovies.some((movie) => movie['#IMDB_ID'] === id);
   };
 
-  const backBtn = () => {
-    // dispatch(setSingleMovie(null));
-    router.push(`/(tabs)/home`);
+  const selectTheTitle = () => {
+    let title = 'Title not found';
+    if (singleMovie) {
+      title =
+        trendingMovies.find((movie) => movie['#IMDB_ID'] === idString)?.[
+          '#TITLE'
+        ] || singleMovie?.name;
+    }
+    return title;
   };
 
   return (
@@ -59,7 +65,10 @@ const SingleMovieScreen = () => {
       <View className='z-20 w-full flex-row justify-between items-center px-4 mt-12 absolute'>
         <TouchableOpacity
           className='bg-[#2496ff] p-2 rounded-full items-center justify-center'
-          onPress={backBtn}
+          onPress={() => {
+            dispatch(setSingleMovie(null));
+            router.back();
+          }}
         >
           <Entypo name='chevron-left' size={24} color='white' />
         </TouchableOpacity>
@@ -80,7 +89,12 @@ const SingleMovieScreen = () => {
           <ActivityIndicator size={50} color='#0000ff' />
         </View>
       ) : (
-        <MovieData singleMovie={singleMovie} width={width} />
+        <MovieData
+          id={idString as string}
+          title={selectTheTitle}
+          singleMovie={singleMovie}
+          width={width}
+        />
       )}
     </View>
   );
