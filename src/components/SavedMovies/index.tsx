@@ -6,16 +6,17 @@ import { router } from 'expo-router';
 
 type TrendingMoviesProps = {
   movies: MovieType[];
+  height?: string;
 };
 
 const SavedMovies = (props: TrendingMoviesProps) => {
-  const { movies } = props;
+  const { movies, height } = props;
 
   const handleClick = (item: MovieType) => {
     router.push(`/(tabs)/home/${item['#IMDB_ID']}`);
   };
   return (
-    <View className='h-[90%]'>
+    <View className={`${height ? height : 'h-[90%]'}`}>
       <FlatList
         data={movies}
         renderItem={({ item }: { item: MovieType }) => (

@@ -1,4 +1,5 @@
 import { MovieType } from '@src/lib/types';
+import { RootState } from '@src/redux/store';
 import React from 'react';
 import {
   Dimensions,
@@ -7,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
 var { width, height } = Dimensions.get('window');
 
@@ -23,7 +25,9 @@ const MovieItem = (props: MovieItemProps) => {
       <View className='w-[48%]'>
         <Image
           source={{
-            uri: item['#IMG_POSTER'],
+            uri: item['#IMG_POSTER']
+              ? item['#IMG_POSTER']
+              : 'https://i.imgur.com/uv0veq8.jpeg',
           }}
           style={{
             width: width / 2.15,

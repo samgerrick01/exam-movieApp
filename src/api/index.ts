@@ -17,6 +17,7 @@ export const useSelectSingleMovie = (id: string) => {
     queryKey: ['single-movie'],
     queryFn: async () => {
       const data = await selectSingleMovie(id);
+      if (data === null || data === undefined) return null;
       return data as MovieDataType;
     },
   });

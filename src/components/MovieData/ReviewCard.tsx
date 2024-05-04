@@ -39,11 +39,14 @@ const ReviewCard = (singleMovie: MovieDataType) => {
         <Text className='text-gray-500 font-poppins text-xs'>
           {dayjs(singleMovie?.review.dateCreated).format('MMM DD, YYYY')}
         </Text>
-        <Text>
-          <FontAwesome name='star' color='#FFC500' />{' '}
-          {singleMovie?.review.reviewRating.ratingValue}/
-          {singleMovie?.review?.reviewRating?.bestRating}
-        </Text>
+        {singleMovie?.review?.reviewRating && (
+          <Text>
+            <FontAwesome name='star' color='#FFC500' />{' '}
+            {singleMovie?.review?.reviewRating?.ratingValue}/
+            {singleMovie?.review?.reviewRating?.bestRating}
+          </Text>
+        )}
+
         <Animated.View>
           <Text
             className='text-black font-sora'
@@ -56,7 +59,6 @@ const ReviewCard = (singleMovie: MovieDataType) => {
           </Text>
         </Animated.View>
       </View>
-      <View className='gap-1'></View>
     </View>
   );
 };

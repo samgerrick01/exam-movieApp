@@ -9,7 +9,7 @@ import {
   setSingleMovie,
 } from '@src/redux/movieSlice';
 import { RootState } from '@src/redux/store';
-import { Stack, router, useLocalSearchParams } from 'expo-router';
+import { Redirect, Stack, router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import {
   ActivityIndicator,
@@ -30,7 +30,11 @@ const SingleMovieScreen = () => {
   );
 
   useEffect(() => {
-    if (data) dispatch(setSingleMovie(data));
+    if (data === null && !isFetching) {
+      alert('Movie not found');
+    } else {
+      if (data) dispatch(setSingleMovie(data));
+    }
   }, [isFetching]);
 
   const saveMovie = async () => {
@@ -77,7 +81,9 @@ const SingleMovieScreen = () => {
     }
   };
 
-  return (
+  return data === null ? (
+    <Redirect href={'/(tabs)/home/'} />
+  ) : (
     <View className='flex-1'>
       <Stack.Screen options={{ headerShown: false }} />
       <View className='z-20 w-full flex-row justify-between items-center px-4 mt-12 absolute'>

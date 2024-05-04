@@ -9,15 +9,19 @@ const Actors = (props: ActorsProps) => {
   const { singleMovie, openLink } = props;
   return (
     <View className='gap-1'>
-      {singleMovie?.actor.map((item, index) => (
-        <Text
-          onPress={() => openLink(item.url)}
-          key={index}
-          className='text-blue-500 text-lg font-poppins'
-        >
-          • {item.name}
-        </Text>
-      ))}
+      {singleMovie?.actor ? (
+        singleMovie?.actor.map((item, index) => (
+          <Text
+            onPress={() => openLink(item.url)}
+            key={index}
+            className='text-white text-lg font-poppins'
+          >
+            • {item.name}
+          </Text>
+        ))
+      ) : (
+        <Text className='text-white text-lg font-poppins'>NA</Text>
+      )}
     </View>
   );
 };
