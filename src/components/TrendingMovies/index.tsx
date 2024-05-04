@@ -1,10 +1,10 @@
-import { View, Text, FlatList, Dimensions } from 'react-native';
-import React from 'react';
 import { MovieType } from '@src/lib/types';
+import React from 'react';
+import { Dimensions, Text, View } from 'react-native';
 // import Carousal from 'react-native-snap-carousel';
-import MovieCard from './MovieCard';
-import Carousel from 'react-native-reanimated-carousel';
 import { router } from 'expo-router';
+import Carousel from 'react-native-reanimated-carousel';
+import MovieCard from './MovieCard';
 
 type TrendingMoviesProps = {
   movies: MovieType[];

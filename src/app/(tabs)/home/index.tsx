@@ -17,7 +17,7 @@ const HomeScreen = () => {
   useEffect(() => {
     if (trendingMoviesData) dispatch(setTrendingMovies(trendingMoviesData));
   }, [trendingMoviesFetched]);
-  console.log(trendingMovies);
+
   return (
     <View className='flex-1'>
       <Image

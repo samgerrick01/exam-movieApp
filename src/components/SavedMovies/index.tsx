@@ -1,8 +1,8 @@
 import { MovieType } from '@src/lib/types';
-import React from 'react';
-import { FlatList, Text, View } from 'react-native';
-import MovieItem from '../PopularMovies/MovieItem';
 import { router } from 'expo-router';
+import React from 'react';
+import { FlatList, View } from 'react-native';
+import MovieItem from '../PopularMovies/MovieItem';
 
 type TrendingMoviesProps = {
   movies: MovieType[];

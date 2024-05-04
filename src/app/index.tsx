@@ -1,9 +1,7 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { useSelector } from 'react-redux';
-import { RootState } from '@src/redux/store';
 import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 const index = () => {
   return (
@@ -42,5 +40,3 @@ const index = () => {
 };
 
 export default index;
-
-const styles = StyleSheet.create({});

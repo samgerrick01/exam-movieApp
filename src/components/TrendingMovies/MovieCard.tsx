@@ -1,12 +1,6 @@
-import {
-  Dimensions,
-  TouchableWithoutFeedback,
-  Image,
-  Text,
-  View,
-} from 'react-native';
-import React from 'react';
 import { MovieType } from '@src/lib/types';
+import React from 'react';
+import { Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
 
 var { width, height } = Dimensions.get('window');
 

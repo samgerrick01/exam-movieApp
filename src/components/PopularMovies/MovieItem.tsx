@@ -1,5 +1,4 @@
 import { MovieType } from '@src/lib/types';
-import { RootState } from '@src/redux/store';
 import React from 'react';
 import {
   Dimensions,
@@ -8,7 +7,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { useSelector } from 'react-redux';
 
 var { width, height } = Dimensions.get('window');
 

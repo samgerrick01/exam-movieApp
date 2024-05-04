@@ -1,4 +1,5 @@
 import { MovieDataType } from '@src/lib/types';
+import { RootState } from '@src/redux/store';
 import dayjs from 'dayjs';
 import React from 'react';
 import {
@@ -9,10 +10,9 @@ import {
   Text,
   View,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import Actors from './Actors';
 import ReviewCard from './ReviewCard';
-import { RootState } from '@src/redux/store';
-import { useSelector } from 'react-redux';
 
 type MovieDataProps = {
   singleMovie: MovieDataType | null;
@@ -23,12 +23,15 @@ type MovieDataProps = {
 
 const MovieData = (props: MovieDataProps) => {
   const { singleMovie, width, title, id } = props;
-  const { trendingMovies } = useSelector((state: RootState) => state.movies);
+  const { trendingMovies, results } = useSelector(
+    (state: RootState) => state.movies
+  );
 
   const getImage = (id: string) => {
-    const image = trendingMovies.find((movie) => movie['#IMDB_ID'] === id)?.[
-      '#IMG_POSTER'
-    ];
+    const image =
+      trendingMovies.find((movie) => movie['#IMDB_ID'] === id)?.[
+        '#IMG_POSTER'
+      ] || results.find((movie) => movie['#IMDB_ID'] === id)?.['#IMG_POSTER'];
     if (image === undefined) {
       if (singleMovie?.image) {
         return singleMovie.image;

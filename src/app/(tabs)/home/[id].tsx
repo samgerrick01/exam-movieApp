@@ -25,7 +25,7 @@ const SingleMovieScreen = () => {
   const dispatch = useDispatch();
   const { id: idString } = useLocalSearchParams();
   const { data, isFetching } = useSelectSingleMovie(idString as string);
-  const { singleMovie, savedMovies, trendingMovies } = useSelector(
+  const { singleMovie, savedMovies, trendingMovies, results } = useSelector(
     (state: RootState) => state.movies
   );
 
@@ -41,6 +41,7 @@ const SingleMovieScreen = () => {
     const movie = trendingMovies.find(
       (movie) => movie['#IMDB_ID'] === idString
     );
+
     if (movie) {
       if (checkIfSaved(idString as string)) {
         dispatch(removeSavedMovie(movie));
@@ -54,6 +55,25 @@ const SingleMovieScreen = () => {
           'savedMovies',
           JSON.stringify([...savedMovies, movie])
         );
+      }
+    } else {
+      const movie = results.find((movie) => movie['#IMDB_ID'] === idString);
+      if (movie) {
+        if (checkIfSaved(idString as string)) {
+          dispatch(removeSavedMovie(movie));
+          await AsyncStorage.setItem(
+            'savedMovies',
+            JSON.stringify(
+              savedMovies.filter((m) => m['#IMDB_ID'] !== idString)
+            )
+          );
+        } else {
+          dispatch(setSavedMovies(movie));
+          await AsyncStorage.setItem(
+            'savedMovies',
+            JSON.stringify([...savedMovies, movie])
+          );
+        }
       }
     }
   };

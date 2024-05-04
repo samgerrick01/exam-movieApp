@@ -6,12 +6,14 @@ export interface MovieState {
   trendingMovies: MovieType[];
   singleMovie: MovieDataType | null;
   savedMovies: MovieType[];
+  results: MovieType[];
 }
 
 const initialState: MovieState = {
   trendingMovies: [],
   singleMovie: null,
   savedMovies: [],
+  results: [],
 };
 
 export const movieSlice = createSlice({
@@ -41,6 +43,9 @@ export const movieSlice = createSlice({
     ) => {
       state.savedMovies = action.payload;
     },
+    setResults: (state, action: PayloadAction<MovieType[]>) => {
+      state.results = action.payload;
+    },
   },
 });
 
@@ -51,6 +56,7 @@ export const {
   removeSavedMovie,
   clearSavedMovies,
   saveSaveMoviesfromLocalStorage,
+  setResults,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

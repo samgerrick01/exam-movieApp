@@ -1,11 +1,15 @@
 import { SavedMovies } from '@src/components';
+import { setResults } from '@src/redux/movieSlice';
+import { RootState } from '@src/redux/store';
 import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Image, Text, TextInput, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchScreen = () => {
+  const dispatch = useDispatch();
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+  const { results } = useSelector((state: RootState) => state.movies);
 
   const fetchMovies = async () => {
     if (!query) return;
@@ -15,7 +19,7 @@ const SearchScreen = () => {
         `https://search.imdbot.workers.dev/?q=${query}`
       );
       const data = await response.json();
-      setResults(data.description);
+      dispatch(setResults(data.description));
     } catch (error) {
       console.error(error);
     }

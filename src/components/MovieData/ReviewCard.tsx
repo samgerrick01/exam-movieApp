@@ -1,8 +1,8 @@
-import { View, Text, Animated, Easing, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import { FontAwesome } from '@expo/vector-icons';
 import { MovieDataType } from '@src/lib/types';
 import dayjs from 'dayjs';
-import { FontAwesome } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { Animated, Easing, Pressable, Text, View } from 'react-native';
 
 const ReviewCard = (singleMovie: MovieDataType) => {
   const [isExpanded, setIsExpanded] = useState(false);
